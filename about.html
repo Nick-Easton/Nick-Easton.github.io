@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于我 - Nick の Blog</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            /* 建议用和主页一样的背景图保持统一感 */
+            background: url('bg_pf.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* 让内容垂直居中 */
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(0px);
+            padding: 40px;
+            border-radius: 30px;
+            width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #49b1f5;
+            font-weight: bold;
+        }
+
+        /* 1. 定义动画“剧本” */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                /* 从下方30像素处开始 */
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                /* 回到原始位置 */
+            }
+        }
+
+        /* 2. 将动画应用到卡片上 */
+        .about-card {
+            /* ... 你之前的样式保持不变 ... */
+
+            animation: fadeInUp 1s ease-out;
+            /* 持续0.8秒，先快后慢 */
+        }
+
+        /* 让标题先出来，段落晚一点点 */
+        .about-card h1 {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about-card p,
+        .about-card div {
+            opacity: 0;
+            /* 初始隐藏 */
+            animation: fadeInUp 0.8s ease-out forwards;
+            /* forwards 让动画停在最后一帧 */
+            animation-delay: 0.3s;
+            /* 延迟0.3秒再开始 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="about-card">
+        <h1>👋 你好，我是 Nick</h1>
+        <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+        <p>目前是一个电子类的大二学生</p>
+        <p></p>
+
+        <div style="margin-top: 30px; text-align: left; line-height: 1.8;">
+            <li>🔭 正在学习：嵌入式 ,HTML, CSS, JavaScript</li>
+            <li>🎨 兴趣爱好：摄影、动漫、技术折腾</li>
+            <li>📫 联系方式：3124054208@qq.com</li>
+            <li>🎮 喜欢的游戏：Apex 、杀戮尖塔 、独立游戏
+        </div>
+
+        <a href="index.html" class="back-home">← 返回主页</a>
+    </div>
+
+</body>
+
+</html>
