@@ -1,0 +1,160 @@
+/* 这里暂时放一点简单的样式，让背景图显示出来 */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('bg_tag.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.navbar {
+    position: fixed;
+    /* 核心：固定定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* 铺满全屏宽度 */
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    /* 确保 padding 不会撑破宽度 */
+    z-index: 1000;
+    /* 确保它在最顶层 */
+    backdrop-filter: blur(5px);
+    /* 给导航栏也加点模糊，更有质感 */
+}
+
+/* 容器布局：左右排列 */
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 100px 10% 50px;
+    /* 增加第一个参数：顶部间距 */
+    gap: 20px;
+    /* 左右卡片的间距 */
+}
+
+/* 通用卡片样式：磨砂玻璃效果 */
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    /* 半透明白色 */
+    backdrop-filter: blur(15px);
+    /* 背景模糊 */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar {
+    width: 300px;
+}
+
+.content {
+    flex: 1;
+}
+
+/* 个人信息具体样式 */
+.profile-card {
+    text-align: center;
+}
+
+/* 专门针对个人信息卡片设置透明度 */
+.profile-card {
+    background: rgba(255, 255, 255, 0.3);
+    /* 比如这里设为 0.3 */
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* 圆形头像 */
+    margin-bottom: 15px;
+    border: 3px solid #fff;
+}
+
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.follow-btn {
+    background: #49b1f5;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.follow-btn:hover {
+    background: #ff7242;
+}
+
+/* 鼠标悬停变色 */
+.nav-item {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    /* 去掉下划线 */
+    font-size: 19px;
+    transition: all 0.3s ease;
+    /* 关键：让颜色变化有个平滑的过程 */
+    position: relative;
+    /* 为以后做下划线动画留位置 */
+}
+
+.nav-item:hover {
+    color: #49b1f5;
+    /* 悬停时的亮蓝色 */
+    text-shadow: 0 0 10px rgba(73, 177, 245, 0.5);
+    /* 增加一点发光感 */
+}
+
+.nav-item.active {
+    color: #49b1f5;
+    font-weight: bold;
+}
+
+/* 1. 定义动画：透明度从 0 变到 1，位置从下往上挪动一点 */
+@keyframes cardFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. 应用到所有卡片类上 */
+.card {
+    /* 默认让它们透明，否则加载瞬间会闪现一下 */
+    opacity: 0;
+    /* 执行动画：时长0.8秒，缓动效果，并停留在最后一帧 */
+    animation: cardFadeIn 0.8s ease-out forwards;
+}
+
+/* 3. 设置先后顺序（延迟执行） */
+.sidebar .card {
+    animation-delay: 0.2s;
+    /* 左侧侧边栏先出来 */
+}
+
+
+/* 标签动画 */
+.fade-text {
+    opacity: 0;
+    animation: cardFadeIn 1s ease-out forwards;
+    animation-delay: 0.1s;
+    /* 标题最先出来 */
+}
