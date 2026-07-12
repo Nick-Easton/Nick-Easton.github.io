@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索 - Nick の Blog</title>
+    <link rel="stylesheet" href="style.css?v=5">
+    <script src="transitions.js?v=1" defer></script>
+    <script src="articles.js" defer></script>
+    <script src="search.js" defer></script>
+</head>
+
+<body class="page-body">
+    <nav class="navbar">
+        <a class="logo" href="index.html">Nick の Blog</a>
+        <div class="menu">
+            <a href="index.html" class="nav-item">首页</a>
+            <a href="categories.html" class="nav-item">分类</a>
+            <a href="archives.html" class="nav-item">归档</a>
+            <a href="about.html" class="nav-item">关于我</a>
+            <a href="search.html" class="nav-item active" aria-current="page">搜索</a>
+        </div>
+    </nav>
+
+    <main class="page-wrapper search-page">
+        <header class="page-heading">
+            <span class="page-kicker">SEARCH</span>
+            <h1>站内搜索</h1>
+            <p>从关键词出发，找到博客里的页面与内容。</p>
+        </header>
+
+        <section class="content-card search-card" aria-labelledby="search-title">
+            <h2 id="search-title" class="visually-hidden">搜索博客</h2>
+            <form class="search-form" id="search-form" role="search">
+                <label class="search-box" for="search-input">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="search-input" type="search" placeholder="试试搜索“嵌入式”或“关于我”" autocomplete="off">
+                </label>
+                <button type="submit" class="search-button">搜索</button>
+            </form>
+
+            <p class="search-hint" id="search-status" aria-live="polite">输入关键词，开始探索这个小小的博客。</p>
+            <div class="search-results" id="search-results"></div>
+        </section>
+    </main>
+</body>
+
+</html>
