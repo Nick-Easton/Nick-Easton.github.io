@@ -87,13 +87,14 @@ GitHub 仓库（唯一代码源）
 git branch --show-current
 git log -1 --oneline
 git push</code></pre>
-                <p>本次使用公开仓库地址部署，所以首次测试不需要把腾讯云密钥写进项目。对于私有仓库，应使用平台提供的授权流程或把凭证放入专门的密钥管理功能，绝不能把 SecretKey、访问令牌或 API Key 直接提交到 Git。</p>
+                <p>首次验证使用“公开仓库部署”：CloudBase 可以直接读取公开代码，因此不需要把腾讯云密钥写进项目，也不需要立刻授予 GitHub 账户权限。这种方式适合先确认目录和页面能否正确发布，但本次实测发现它只保存了仓库地址，并不会在每次 <code>git push</code> 后自动创建新版本。</p>
+                <p>要让推送自动触发部署，需要把服务更新为“Git 个人仓库部署”，并通过 GitHub 官方授权页允许 CloudBase 读取仓库和管理部署所需的 Webhook。对于私有仓库同样应使用平台提供的授权流程或专门的密钥管理功能，绝不能把 SecretKey、访问令牌或 API Key 直接提交到 Git。</p>
             </section>
 
             <section id="console-steps">
                 <h2>控制台部署步骤与参数解释</h2>
                 <p>第一步是在腾讯云 CloudBase 创建环境。免费体验版需要领取兑换码，确认订单金额为 0 元后完成开通。新环境创建后可能会短暂显示“状态异常”或“正在初始化”，这时应等待资源准备完成并刷新页面，而不是重复购买环境。</p>
-                <p>第二步进入“静态网站托管”，选择“Git 仓库部署”，填写公开仓库地址并选择目标分支。这个步骤决定 CloudBase 从哪里取得代码：</p>
+                <p>第二步进入“静态网站托管”，先选择“公开仓库部署”，填写仓库地址并选择目标分支。这个步骤决定 CloudBase 从哪里取得代码：</p>
                 <pre><code>仓库地址：https://github.com/Nick-Easton/Nick-Easton.github.io.git
 仓库分支：agent/blog-foundation
 项目名称：nick-blog-mirror</code></pre>
@@ -111,7 +112,7 @@ git push</code></pre>
                     <li><strong>构建产物目录</strong>是最终要上传的文件夹。这里直接上传仓库根目录，所以填写 <code>./</code>，不能沿用默认的 <code>./dist</code>。</li>
                     <li><strong>部署路径</strong>决定网站挂载位置。填写 <code>/</code> 后，<code>index.html</code> 会成为域名根路径的首页。</li>
                 </ul>
-                <p>确认后，CloudBase 会依次检出代码、准备构建环境、执行部署命令并上传文件。第一次部署日志显示共上传 17 个文件、失败 0 个，最终生成 <code>tcloudbaseapp.com</code> 测试域名。</p>
+                <p>确认后，CloudBase 会依次检出代码、准备构建环境、执行部署命令并上传文件。第一次部署日志显示共上传 17 个文件、失败 0 个，最终生成 <code>tcloudbaseapp.com</code> 测试域名。加入本文后再次部署，日志显示共上传 18 个文件，其中包括 <code>/posts/cloudbase-mirror-deployment.html</code>，失败仍为 0 个。</p>
             </section>
 
             <section id="verification">
@@ -133,14 +134,21 @@ $response.StatusCode</code></pre>
 
             <section id="automatic-updates">
                 <h2>Git 推送如何触发后续更新</h2>
-                <p>CloudBase 服务保存了仓库地址和部署分支。以后在任意电脑上继续开发时，完整流程是先同步远程修改，再编辑、检查、提交并推送：</p>
+                <p>只填写公开仓库地址并不等于已经建立自动更新。要让 CloudBase 知道“目标分支刚刚发生变化”，GitHub 需要在收到推送时通过 Webhook 主动通知 CloudBase。为此，我在服务的“更新服务”页面把部署方式确认成“Git 个人仓库部署”，点击 GitHub 授权，并重新核对了以下信息：</p>
+                <pre><code>授权账户：Nick-Easton（个人账户）
+Git 仓库：Nick-Easton/Nick-Easton.github.io
+监听分支：agent/blog-foundation
+构建产物目录：./
+部署路径：/</code></pre>
+                <p>授权属于账户权限变更，应该由仓库所有者本人完成。授权页会列出 CloudBase 申请的仓库读取和 Webhook 管理权限；确认登录账户、应用名称和权限范围后再同意。如果以后不再使用自动部署，可以在 GitHub 的应用授权设置中撤销访问权限。</p>
+                <p>CloudBase 服务保存仓库、分支和构建参数以后，任意电脑上的开发流程都是先同步远程修改，再编辑、检查、提交并推送：</p>
                 <pre><code>git pull --ff-only
 # 编辑并在本地预览
 git status
 git add .
 git commit -m "新增或更新博客文章"
 git push</code></pre>
-                <p><code>git push</code>只负责把新提交送到 GitHub；CloudBase 检测到目标分支变化后，才会开始新的构建与部署。访客不需要访问 GitHub，也不需要登录腾讯云，他们只访问已经发布的镜像域名。</p>
+                <p><code>git push</code>只负责把新提交送到 GitHub。随后 GitHub 的 Webhook 通知 CloudBase，CloudBase 拉取指定提交并创建新的部署版本；只有部署成功后，访客才会看到更新。访客不需要访问 GitHub，也不需要登录腾讯云，他们只访问已经发布的镜像域名。</p>
                 <p>分支必须保持一致。目前 CloudBase 监听 <code>agent/blog-foundation</code>，如果以后把博客正式合并到 <code>main</code>，就要同步修改 CloudBase 的部署分支，否则推送到 <code>main</code> 不会更新镜像。</p>
                 <p>发布不是瞬间完成的。推送后应到“应用部署列表”确认新版本状态为成功，再打开网站检查。CDN 节点和浏览器缓存也可能让旧内容短暂存在，因此不要在几秒内反复修改部署配置。</p>
             </section>
