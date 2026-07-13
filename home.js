@@ -19,11 +19,13 @@ if (latestArticle && latestCard) {
     const excerpt = latestCard.querySelector('[data-article-excerpt]');
     const meta = latestCard.querySelector('[data-article-meta]');
     const tagList = latestCard.querySelector('[data-article-tags]');
+    const mark = latestCard.querySelector('.post-card-mark');
 
     titleLink.textContent = latestArticle.title;
     titleLink.href = latestArticle.url;
     excerpt.textContent = latestArticle.excerpt;
     meta.textContent = `${latestArticle.category} · ${latestArticle.dateLabel} · 阅读 ${latestArticle.readingTime}`;
+    mark.textContent = String(articles.length).padStart(2, '0');
     tagList.replaceChildren();
 
     latestArticle.tags.forEach((tag) => {
