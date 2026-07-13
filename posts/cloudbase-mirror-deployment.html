@@ -133,7 +133,7 @@ $response.StatusCode</code></pre>
             </section>
 
             <section id="automatic-updates">
-                <h2>Git 推送如何触发后续更新</h2>
+                <h2>验证 Git 推送能否触发更新</h2>
                 <p>只填写公开仓库地址并不等于已经建立自动更新。理想情况下，GitHub 收到目标分支的推送后会通知 CloudBase，CloudBase 再拉取对应提交并创建新版本。为建立这条链路，我在服务的“更新服务”页面把部署方式确认成“Git 个人仓库部署”，点击 GitHub 授权，并重新核对了以下信息：</p>
                 <pre><code>授权账户：Nick-Easton（个人账户）
 Git 仓库：Nick-Easton/Nick-Easton.github.io
@@ -141,9 +141,10 @@ Git 仓库：Nick-Easton/Nick-Easton.github.io
 构建产物目录：./
 部署路径：/</code></pre>
                 <p>授权属于账户权限变更，应该由仓库所有者本人完成。授权页会列出 CloudBase 申请的仓库读取和触发器管理权限；确认登录账户、应用名称和权限范围后再同意。如果以后不再使用自动部署，可以在 GitHub 的应用授权设置中撤销访问权限。</p>
-                <p>本次测试使用提交 <code>46ac2fa</code> 验证自动触发：推送后持续刷新部署版本列表，但列表仍只有手动创建的 <code>nick-blog-mirror-001</code> 和 <code>nick-blog-mirror-002</code>，没有出现第 3 个版本；仓库的普通 Webhook 列表也为空。因此，目前只能确认 GitHub 授权和手动拉取成功，不能确认自动部署已经建立。</p>
+                <p>第一次测试使用提交 <code>46ac2fa</code> 验证自动触发：推送后持续刷新部署版本列表，但列表仍只有手动创建的 <code>nick-blog-mirror-001</code> 和 <code>nick-blog-mirror-002</code>，没有出现第 3 个版本；仓库的普通 Webhook 列表也为空。因此，当时只能确认 GitHub 授权和手动拉取成功，不能确认自动部署已经建立。</p>
                 <blockquote>判断自动部署是否成功，必须看到“推送之后、没有点击部署按钮，却自动产生了新版本”。只看到“已授权”或手动部署成功，都不算验证通过。</blockquote>
-                <p>当前服务最初由“公开仓库部署”创建，后来再更新为个人仓库部署。触发失败可能与旧服务的创建方式或平台级授权机制有关；在没有更多日志证据前，这只是一项排查方向，而不是已经证实的原因。下一步应在保留现有可访问站点的前提下，重新创建个人仓库部署服务进行对照测试。</p>
+                <p>为了排除旧服务最初由“公开仓库部署”创建的影响，我删除了旧服务，再从“Git 个人仓库部署”入口重新创建同名服务。新服务的首次部署 <code>nick-blog-mirror-001</code> 成功上传 18 个文件；随后分别推送测试提交 <code>d31689d</code> 和 <code>eb7f404</code>，并在服务明确显示成功后再次测试。经过等待和多次刷新，版本列表仍然只有首次部署，没有自动产生 <code>nick-blog-mirror-002</code>。</p>
+                <p>这个对照实验说明：问题并不是旧服务升级方式造成的。CloudBase 的<a href="https://docs.cloudbase.net/hosting/web-hosting" target="_blank" rel="noopener noreferrer">静态网站托管文档</a>把个人 Git 仓库部署描述为“代码更新自动触发部署”，但本次控制台行为与文档描述不一致。当前可靠流程仍是推送 GitHub 后手动点击“更新服务”；要实现无人值守发布，下一步需要联系 CloudBase 支持排查平台触发器，或改用 GitHub Actions 与 CloudBase CLI。</p>
                 <p>当自动触发真正建立以后，任意电脑上的开发流程才会变成先同步远程修改，再编辑、检查、提交并推送：</p>
                 <pre><code>git pull --ff-only
 # 编辑并在本地预览
@@ -196,7 +197,6 @@ git push</code></pre>
     <footer class="home-footer">
         <p>© 2026 Nick · 保持好奇，无限进步。</p>
     </footer>
-    <!-- CloudBase automatic deployment verification retry: service-ready 2026-07-13 -->
 </body>
 
 </html>
