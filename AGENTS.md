@@ -2,11 +2,11 @@
 
 修改本博客时必须遵守 [`CONTRIBUTING.md`](./CONTRIBUTING.md) 中的维护格式。
 
-- 面向访客的功能、页面、交互或部署变化，需要同步更新 `changelog.html`。
+- 每次代码、内容、样式、配置或文档改动都必须同步更新 `changelog.html`；很小的连续调整可以合并进当前未发布版本，但不得省略记录。
 - 功能列表、项目结构、访问地址或发布方式变化，需要同步更新 `README.md`。
 - 新文章必须同时添加文章页面和 `articles.js` 数据，并验证首页、分类、归档与搜索入口。
 - Git 提交标题使用 `类型：简短说明`，优先使用“新增、修复、优化、文档、部署、重构”。
-- GitHub PR 说明遵循 `.github/PULL_REQUEST_TEMPLATE.md`。
+- GitHub PR 说明遵循 `.github/PULL_REQUEST_TEMPLATE.md`，每次推送后都要把本批改动和验证结果补充到 PR Conversation。
 - 修改导航时检查根目录页面、`posts/` 文章页面和窄屏布局。
 - 提交前检查本地链接、JavaScript 语法与 `git diff --check`。
 - 不得把密钥、令牌、支付资料或其他隐私写入代码、文档、提交信息或日志。

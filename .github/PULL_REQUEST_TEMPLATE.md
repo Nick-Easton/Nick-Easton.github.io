@@ -27,6 +27,7 @@
 
 - [ ] 已更新 `changelog.html`
 - [ ] 已更新 `README.md`
+- [ ] 已将本批改动补充到 PR Conversation
 - [ ] 本次改动无需更新上述文档，并已说明原因
 
 ## 补充说明

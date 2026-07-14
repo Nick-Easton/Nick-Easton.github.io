@@ -34,6 +34,20 @@
 - [`AGENTS.md`](./AGENTS.md)：让后续 Codex 对话自动遵守同一套项目规则；
 - [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md)：创建 PR 时自动生成检查与说明结构。
 
+## 固定更新流程
+
+每次修改都按照同一个闭环执行：
+
+1. 修改并完成本地验证；
+2. 更新网站内的 `changelog.html`；
+3. 需要时同步 README 和维护说明；
+4. 创建 Git 提交并推送 GitHub；
+5. 更新当前 PR Conversation，写明改动、验证和发布影响；
+6. 手动部署 CloudBase；
+7. 检查实际线上文件后再确认发布完成。
+
+无论改动大小，都不能省略更新日志与 GitHub 说明；很小的连续调整可以合并记录在同一个尚未发布版本中。
+
 ## 项目结构
 
 ```text
@@ -44,6 +58,7 @@ my-blog/
 ├─ search.html                # 搜索
 ├─ changelog.html             # 更新日志
 ├─ about.html                 # 关于我
+├─ favicon.jpg                # 浏览器标签页图标
 ├─ CONTRIBUTING.md            # 博客维护格式
 ├─ AGENTS.md                  # Codex 项目规则
 ├─ articles.js                # 统一文章数据
