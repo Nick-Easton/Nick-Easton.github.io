@@ -1224,7 +1224,7 @@ html {
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 15px;
     padding-top: 26px;
 }
@@ -1274,6 +1274,44 @@ html {
 
 .category-card a:hover {
     color: #248fd3;
+}
+
+.category-article-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.category-card .category-article-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    overflow: visible;
+    border-radius: 11px;
+    background: rgba(73, 177, 245, 0.07);
+    white-space: normal;
+    transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.category-card .category-article-link:hover {
+    background: rgba(73, 177, 245, 0.14);
+    transform: translateX(3px);
+}
+
+.category-article-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.category-article-date {
+    color: #8a96a3;
+    font-size: 11px;
+    white-space: nowrap;
 }
 
 /* 文章详情页 */

@@ -86,12 +86,32 @@ function renderCategories() {
         const title = document.createElement('h3');
         title.textContent = name;
 
-        const latest = [...grouped[name]].sort((a, b) => b.date.localeCompare(a.date))[0];
-        const link = document.createElement('a');
-        link.href = latest.url;
-        link.textContent = latest.title;
+        const articleList = document.createElement('ul');
+        articleList.className = 'category-article-list';
 
-        card.append(head, title, link);
+        [...grouped[name]]
+            .sort((a, b) => b.date.localeCompare(a.date))
+            .forEach((article) => {
+                const item = document.createElement('li');
+                const link = document.createElement('a');
+                link.className = 'category-article-link';
+                link.href = article.url;
+
+                const articleTitle = document.createElement('span');
+                articleTitle.className = 'category-article-title';
+                articleTitle.textContent = article.title;
+
+                const date = document.createElement('time');
+                date.className = 'category-article-date';
+                date.dateTime = article.date;
+                date.textContent = article.date.slice(5).replace('-', '/');
+
+                link.append(articleTitle, date);
+                item.append(link);
+                articleList.append(item);
+            });
+
+        card.append(head, title, articleList);
         container.append(card);
     });
 }
