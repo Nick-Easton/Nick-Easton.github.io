@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nick の Blog 更新日志，记录网站功能、界面与部署方式的持续优化。">
+    <title>更新日志 - Nick の Blog</title>
+    <link rel="stylesheet" href="style.css?v=7">
+    <script src="transitions.js?v=1" defer></script>
+</head>
+
+<body class="page-body">
+    <nav class="navbar">
+        <a class="logo" href="index.html">Nick の Blog</a>
+        <div class="menu">
+            <a href="index.html" class="nav-item">首页</a>
+            <a href="categories.html" class="nav-item">分类</a>
+            <a href="archives.html" class="nav-item">归档</a>
+            <a href="changelog.html" class="nav-item active" aria-current="page">更新日志</a>
+            <a href="about.html" class="nav-item">关于我</a>
+            <a href="search.html" class="nav-item">搜索</a>
+        </div>
+    </nav>
+
+    <main class="page-wrapper changelog-page">
+        <header class="page-heading">
+            <span class="page-kicker">CHANGELOG</span>
+            <h1>更新日志</h1>
+            <p>记录博客从一个想法，慢慢长成个人数字空间的每一步。</p>
+        </header>
+
+        <section class="content-card" aria-labelledby="changelog-title">
+            <div class="section-title-row">
+                <div>
+                    <span class="section-eyebrow">BUILD IN PUBLIC</span>
+                    <h2 id="changelog-title">持续生长中</h2>
+                </div>
+                <span class="count-badge">当前版本 v0.4.0</span>
+            </div>
+
+            <div class="changelog-intro">
+                <p>这里不仅记录新增功能，也记录交互、内容结构和部署方式的调整。每一次值得留下的优化，都会成为下一次迭代的起点。</p>
+                <a href="https://github.com/Nick-Easton/Nick-Easton.github.io" target="_blank" rel="noreferrer">查看 GitHub 仓库 ↗</a>
+            </div>
+
+            <ol class="changelog-list">
+                <li class="changelog-entry">
+                    <span class="changelog-dot" aria-hidden="true"></span>
+                    <article>
+                        <header class="changelog-entry-head">
+                            <div>
+                                <span class="version-badge">v0.4.0</span>
+                                <time datetime="2026-07-14">2026 年 7 月 14 日</time>
+                            </div>
+                            <span class="change-type">体验优化</span>
+                        </header>
+                        <h3>分类页支持浏览同一分类下的全部文章</h3>
+                        <ul>
+                            <li>修复一个分类只能进入最新文章的问题。</li>
+                            <li>为每篇文章生成独立入口，并按发布日期倒序排列。</li>
+                            <li>补充日期、悬停反馈与自适应卡片布局。</li>
+                            <li>新增独立更新日志栏目，并同步完善 GitHub 项目说明。</li>
+                            <li>建立更新日志、Git 提交和 GitHub PR 说明的统一维护格式。</li>
+                        </ul>
+                    </article>
+                </li>
+
+                <li class="changelog-entry">
+                    <span class="changelog-dot" aria-hidden="true"></span>
+                    <article>
+                        <header class="changelog-entry-head">
+                            <div>
+                                <span class="version-badge">v0.3.0</span>
+                                <time datetime="2026-07-13">2026 年 7 月 13 日</time>
+                            </div>
+                            <span class="change-type deployment">部署优化</span>
+                        </header>
+                        <h3>增加腾讯云 CloudBase 国内访问镜像</h3>
+                        <ul>
+                            <li>为国内访客增加独立的静态托管访问地址。</li>
+                            <li>完成 CloudBase 服务创建、手动部署与访问检查。</li>
+                            <li>整理一篇包含原理、步骤和排错过程的详细技术文章。</li>
+                            <li>预留 GitHub Actions 部署工作流；当前改为手动触发，网站更新采用 CloudBase 手动发布。</li>
+                        </ul>
+                    </article>
+                </li>
+
+                <li class="changelog-entry">
+                    <span class="changelog-dot" aria-hidden="true"></span>
+                    <article>
+                        <header class="changelog-entry-head">
+                            <div>
+                                <span class="version-badge">v0.2.0</span>
+                                <time datetime="2026-07-12">2026 年 7 月 12 日</time>
+                            </div>
+                            <span class="change-type content">内容系统</span>
+                        </header>
+                        <h3>完成文章数据与阅读页面</h3>
+                        <ul>
+                            <li>发布第一篇博客搭建记录。</li>
+                            <li>增加文章详情页、阅读进度和文章元信息。</li>
+                            <li>用统一文章数据驱动首页、归档、分类和搜索页面。</li>
+                            <li>加入页面之间的平滑过渡效果。</li>
+                        </ul>
+                    </article>
+                </li>
+
+                <li class="changelog-entry">
+                    <span class="changelog-dot" aria-hidden="true"></span>
+                    <article>
+                        <header class="changelog-entry-head">
+                            <div>
+                                <span class="version-badge">v0.1.0</span>
+                                <time datetime="2026-03-18">2026 年 3 月 18 日</time>
+                            </div>
+                            <span class="change-type foundation">基础架构</span>
+                        </header>
+                        <h3>个人博客的最初样板上传 GitHub</h3>
+                        <ul>
+                            <li>创建个人博客仓库并上传第一批静态页面。</li>
+                            <li>加入中文标题与早期个人信息卡片。</li>
+                            <li>开始用 Git 保存网站的每一次变化。</li>
+                        </ul>
+                    </article>
+                </li>
+            </ol>
+        </section>
+    </main>
+</body>
+
+</html>

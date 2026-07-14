@@ -1,9 +1,6 @@
 name: Deploy to CloudBase
 
 on:
-  push:
-    branches:
-      - agent/blog-foundation
   workflow_dispatch:
 
 concurrency:
