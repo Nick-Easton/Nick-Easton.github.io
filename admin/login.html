@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>管理员登录 - Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="../favicon.jpg?v=1">
+    <link rel="stylesheet" href="../style.css?v=8">
+    <script src="https://static.cloudbase.net/cloudbase-js-sdk/3.7.1/cloudbase.full.js" defer></script>
+    <script src="../cloudbase-config.js?v=2" defer></script>
+    <script src="../cloudbase-client.js?v=2" defer></script>
+    <script src="login.js?v=2" defer></script>
+</head>
+
+<body class="admin-auth-body">
+    <main class="admin-auth-shell">
+        <section class="admin-auth-card">
+            <a class="admin-auth-logo" href="../index.html">Nick の Blog</a>
+            <span class="page-kicker">OWNER ACCESS</span>
+            <h1>进入日记管理</h1>
+            <p>这里仅供 Nick 使用。访客不需要登录，也不会看到发布入口。</p>
+
+            <form id="admin-login-form" class="admin-login-form" action="#" method="post" onsubmit="return false;">
+                <label>
+                    <span>管理员邮箱</span>
+                    <input type="email" name="email" autocomplete="username" required placeholder="name@example.com">
+                </label>
+                <label>
+                    <span>密码</span>
+                    <input type="password" name="password" autocomplete="current-password" minlength="8" required placeholder="输入 CloudBase 登录密码">
+                </label>
+                <button type="submit" class="admin-primary-button" disabled>正在准备安全登录……</button>
+                <p class="admin-form-message" id="login-message" role="status"></p>
+            </form>
+
+            <div class="admin-security-note">
+                <strong>安全说明</strong>
+                <p>邮箱和密码只会提交给 CloudBase 身份认证，不会保存在本网页或 GitHub 仓库中。</p>
+            </div>
+            <a class="admin-return-link" href="../diary.html">← 返回日记页面</a>
+        </section>
+    </main>
+</body>
+
+</html>

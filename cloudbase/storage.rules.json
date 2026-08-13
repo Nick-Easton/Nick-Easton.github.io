@@ -1,0 +1,4 @@
+{
+    "read": "/^diary-public\\//.test(resource.path)",
+    "write": "auth != null && auth.uid == '2087809843698028545' && /^diary-public\\//.test(resource.path)"
+}

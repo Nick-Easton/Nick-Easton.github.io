@@ -16,6 +16,9 @@
 - 基于文章数据的站内搜索
 - 腾讯云 CloudBase 国内访问镜像
 - 独立更新日志页面
+- 面向访客公开的生活日记列表与正文页
+- 仅限博主邮箱密码登录的日记管理后台
+- 日记草稿、实时预览、图片上传、发布与内容管理
 
 ## 更新日志
 
@@ -57,6 +60,14 @@ my-blog/
 ├─ archives.html              # 归档
 ├─ search.html                # 搜索
 ├─ changelog.html             # 更新日志
+├─ diary.html                 # 公开日记列表
+├─ diary-post.html            # 公开日记正文
+├─ diary.js                   # 日记列表读取与渲染
+├─ diary-post.js              # 日记正文读取与渲染
+├─ diary-markdown.js          # 安全的轻量正文格式渲染
+├─ cloudbase-config.example.js# 可提交的 CloudBase 配置模板
+├─ cloudbase-config.js        # 不纳入 Git 的实际浏览器运行配置
+├─ cloudbase-client.js        # CloudBase 前端连接层
 ├─ about.html                 # 关于我
 ├─ favicon.jpg                # 浏览器标签页图标
 ├─ CONTRIBUTING.md            # 博客维护格式
@@ -65,6 +76,8 @@ my-blog/
 ├─ listing.js                 # 分类与归档渲染
 ├─ search.js                  # 搜索逻辑
 ├─ style.css                  # 全站样式
+├─ admin/                     # 管理员登录与日记编辑后台
+├─ cloudbase/                 # 数据库、存储规则及首次配置说明
 ├─ posts/                     # 文章详情页
 └─ .github/                   # PR 模板与 CloudBase 工作流
 ```
@@ -78,6 +91,19 @@ python -m http.server 8000
 ```
 
 然后访问 <http://127.0.0.1:8000/>。
+
+## 日记发布系统
+
+- 访客通过 [`diary.html`](./diary.html) 阅读已发布日记，不需要注册或登录。
+- 博主通过 `admin/login.html` 使用 CloudBase 邮箱和密码进入管理后台。
+- 管理员邮箱和密码不保存在仓库；页面登录后还会使用唯一 UID 校验发布权限。
+- 公开日记读取使用 CloudBase Publishable Key；它只有访客级权限，不能替换成管理员 API Key 或腾讯云密钥。
+- 浏览器端使用 CloudBase Web SDK v3，使身份认证请求与当前 HTTP API 网关保持一致。
+- 日记正文保存在 CloudBase 文档数据库的 `diary_posts` 集合，数据库规则只允许唯一管理员 UID 写入；图片保存在 `diary-public/` 云存储目录。
+- 当前体验版环境因同时启用了 PostgreSQL，旧云存储不能切换到自定义规则，继续使用平台的 `READONLY` 规则（公开读取，仅上传者和管理员可写）；网站不提供访客注册或上传入口。
+- 首次开通身份认证、创建集合、绑定 UID 和应用安全规则时，请按照 [`cloudbase/SETUP.md`](./cloudbase/SETUP.md) 操作。
+
+日记属于动态内容：网站程序部署完成后，博主可以在管理后台直接发布，无需为每篇日记重新提交 Git 或部署静态文件。日记系统自身的代码、样式与配置改动仍然必须遵循本仓库的固定更新流程。
 
 ## 发布方式
 

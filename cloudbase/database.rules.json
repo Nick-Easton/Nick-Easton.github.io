@@ -1,0 +1,6 @@
+{
+    "read": "doc.status == 'published' || (auth != null && auth.uid == '2087809843698028545' && doc.authorUid == auth.uid)",
+    "create": "auth != null && auth.uid == '2087809843698028545' && request.data.authorUid == auth.uid",
+    "update": "auth != null && auth.uid == '2087809843698028545' && doc.authorUid == auth.uid && request.data.authorUid == auth.uid",
+    "delete": "auth != null && auth.uid == '2087809843698028545'"
+}
