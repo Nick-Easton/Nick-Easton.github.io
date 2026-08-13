@@ -97,6 +97,7 @@ python -m http.server 8000
 - 访客通过 [`diary.html`](./diary.html) 阅读已发布日记，不需要注册或登录。
 - 博主通过 `admin/login.html` 使用 CloudBase 邮箱和密码进入管理后台。
 - 管理员邮箱和密码不保存在仓库；页面登录后还会使用唯一 UID 校验发布权限。
+- 部署配置只保存管理员邮箱的小写 SHA-256 摘要，不公开邮箱明文。
 - 公开日记读取使用 CloudBase Publishable Key；它只有访客级权限，不能替换成管理员 API Key 或腾讯云密钥。
 - 浏览器端使用 CloudBase Web SDK v3，使身份认证请求与当前 HTTP API 网关保持一致。
 - 日记正文保存在 CloudBase 文档数据库的 `diary_posts` 集合，数据库规则只允许唯一管理员 UID 写入；图片保存在 `diary-public/` 云存储目录。

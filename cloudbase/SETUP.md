@@ -12,7 +12,7 @@
    - `nick-easton.github.io`（GitHub Pages）。
 4. 复制 `cloudbase-config.example.js` 为不纳入 Git 的 `cloudbase-config.js`，在“API Key 配置”中创建 Publishable Key 并填入。Publishable Key 只代表公开访客权限，可以放在浏览器端；不要填入 API Key、SecretId 或 SecretKey。
 5. 打开 `/admin/login.html`，登录后复制页面显示的当前 UID。
-6. 将管理员邮箱、CloudBase 内部用户名和 UID 填入不纳入 Git 的 `cloudbase-config.js`，并用 UID 配置以下两份规则：
+6. 将管理员邮箱的小写 SHA-256 摘要、CloudBase 内部用户名和 UID 填入不纳入 Git 的 `cloudbase-config.js`，并用 UID 配置以下两份规则。不要把邮箱明文放进需要部署的浏览器配置：
    - `cloudbase/database.rules.json`；
    - `cloudbase/storage.rules.json`。
    - 内部用户名需兼容 Web SDK v2：使用 5～24 位英文字母、数字、`_` 或 `-`，不要直接使用含 `@` 的邮箱。

@@ -20,6 +20,12 @@
         return candidates.find((value) => typeof value === 'string' && value.trim()) || '';
     }
 
+    async function sha256(value) {
+        const data = new TextEncoder().encode(value);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
+    }
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (submitButton.disabled) return;
@@ -32,8 +38,8 @@
         setMessage('正在验证身份……');
 
         try {
-            if (config.adminEmail
-                && email.toLowerCase() !== String(config.adminEmail).toLowerCase()) {
+            if (config.adminEmailHash
+                && await sha256(email.toLowerCase()) !== config.adminEmailHash) {
                 throw new Error('这个邮箱不是本博客配置的管理员账号。');
             }
 

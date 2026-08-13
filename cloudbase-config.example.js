@@ -3,7 +3,7 @@ window.BLOG_CLOUDBASE_CONFIG = Object.freeze({
     region: 'ap-shanghai',
     accessKey: 'YOUR_PUBLISHABLE_KEY',
     adminUid: 'YOUR_ADMIN_UID',
-    adminEmail: 'YOUR_ADMIN_EMAIL',
+    adminEmailHash: 'SHA256_OF_LOWERCASE_ADMIN_EMAIL',
     adminLoginName: 'YOUR_CLOUDBASE_USERNAME',
     diaryCollection: 'diary_posts'
 });
