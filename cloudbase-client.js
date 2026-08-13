@@ -23,6 +23,8 @@
     const app = window.cloudbase.init(initOptions);
     const auth = app.auth();
     const db = app.database();
+    const diaryImageBucket = config.diaryImageBucket || 'diary-images';
+    const storage = app.storage.from(diaryImageBucket);
     const diaryCollection = db.collection(config.diaryCollection || 'diary_posts');
 
     function getUserUid(user) {
@@ -69,22 +71,35 @@
 
     async function resolveImageUrls(images) {
         const list = Array.isArray(images) ? images : [];
-        const fileIds = list.map((image) => image.fileId).filter(Boolean);
-        if (!fileIds.length) return list;
+        if (!list.some((image) => image.fileId)) return list;
 
         try {
-            const result = await app.getTempFileURL({ fileList: fileIds });
-            const resolved = new Map(
-                (result.fileList || []).map((item) => [item.fileID, item.tempFileURL])
-            );
-            return list.map((image) => ({
-                ...image,
-                url: resolved.get(image.fileId) || image.url || ''
+            return await Promise.all(list.map(async (image) => {
+                if (!image.fileId) return image;
+                const result = storage.getPublicUrl(image.fileId);
+                return {
+                    ...image,
+                    url: result.data && result.data.publicUrl
+                        ? result.data.publicUrl
+                        : image.url || ''
+                };
             }));
         } catch (error) {
             console.warn('日记图片地址解析失败：', error);
             return list;
         }
+    }
+
+    async function uploadDiaryImage(cloudPath, file) {
+        const result = await storage.upload(cloudPath, file, {
+            contentType: file.type || 'application/octet-stream',
+            upsert: false
+        });
+        if (result.error) throw result.error;
+        if (!result.data || !result.data.id) {
+            throw new Error('CloudBase 没有返回图片文件 ID。');
+        }
+        return result.data.path;
     }
 
     async function getPublishedDiaries() {
@@ -119,6 +134,7 @@
         isAuthenticatedAccount,
         isAdminConfigured,
         resolveImageUrls,
+        uploadDiaryImage,
         getPublishedDiaries,
         getPublishedDiary
     });

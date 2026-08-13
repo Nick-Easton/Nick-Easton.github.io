@@ -238,10 +238,9 @@
             }
             uploadStatus.textContent = `正在上传 ${file.name}……`;
             const extension = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
-            const cloudPath = `diary-public/${currentUid}/${Date.now()}-${crypto.randomUUID()}.${extension}`;
+            const cloudPath = `${currentUid}/${Date.now()}-${crypto.randomUUID()}.${extension}`;
             try {
-                const result = await cloud.app.uploadFile({ cloudPath, filePath: file });
-                const fileId = result.fileID;
+                const fileId = await cloud.uploadDiaryImage(cloudPath, file);
                 const resolved = await cloud.resolveImageUrls([{ fileId }]);
                 currentImages.push({
                     fileId,

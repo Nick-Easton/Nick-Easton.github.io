@@ -100,8 +100,9 @@ python -m http.server 8000
 - 部署配置只保存管理员邮箱的小写 SHA-256 摘要，不公开邮箱明文。
 - 公开日记读取使用 CloudBase Publishable Key；它只有访客级权限，不能替换成管理员 API Key 或腾讯云密钥。
 - 浏览器端使用 CloudBase Web SDK v3，使身份认证请求与当前 HTTP API 网关保持一致。
-- 日记正文保存在 CloudBase 文档数据库的 `diary_posts` 集合，数据库规则只允许唯一管理员 UID 写入；图片保存在 `diary-public/` 云存储目录。
-- 当前体验版环境因同时启用了 PostgreSQL，旧云存储不能切换到自定义规则，继续使用平台的 `READONLY` 规则（公开读取，仅上传者和管理员可写）；网站不提供访客注册或上传入口。
+- 日记正文保存在 CloudBase 文档数据库的 `diary_posts` 集合，数据库规则只允许唯一管理员 UID 写入；图片保存在 PostgreSQL 模式的 `diary-images` Bucket。
+- `diary-images` 使用 RLS 实现访客公开读取、唯一管理员 UID 写入，并限制为 JPG、PNG、WebP 与单文件 8 MB；网站不提供访客注册或上传入口。
+- 图片上传使用 Web SDK v3 的 PG 云存储客户端 `app.storage.from('diary-images')`，对象路径按 `<管理员 UID>/<文件名>` 隔离。
 - 首次开通身份认证、创建集合、绑定 UID 和应用安全规则时，请按照 [`cloudbase/SETUP.md`](./cloudbase/SETUP.md) 操作。
 
 日记属于动态内容：网站程序部署完成后，博主可以在管理后台直接发布，无需为每篇日记重新提交 Git 或部署静态文件。日记系统自身的代码、样式与配置改动仍然必须遵循本仓库的固定更新流程。
