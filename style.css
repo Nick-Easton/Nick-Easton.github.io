@@ -130,6 +130,19 @@ body {
     font-weight: bold;
 }
 
+.nav-login {
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+}
+
+.nav-login:hover {
+    border-color: rgba(73, 177, 245, 0.75);
+    background: rgba(73, 177, 245, 0.16);
+}
+
 /* 1. 定义动画：透明度从 0 变到 1，位置从下往上挪动一点 */
 @keyframes cardFadeIn {
     0% {
@@ -457,6 +470,11 @@ body {
         font-size: 14px;
     }
 
+    .nav-login {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+
     .page-wrapper {
         width: min(100% - 24px, 860px);
         padding-top: 100px;
@@ -490,6 +508,25 @@ body {
 
 .diary-heading {
     max-width: 720px;
+}
+
+.diary-admin-entry {
+    display: inline-flex;
+    margin-top: 18px;
+    padding: 10px 17px;
+    border: 1px solid rgba(40, 107, 142, 0.22);
+    border-radius: 999px;
+    color: #286b8e;
+    background: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.diary-admin-entry:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
 }
 
 .diary-feed {
