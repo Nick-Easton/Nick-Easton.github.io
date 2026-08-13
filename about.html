@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>关于我 - Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg?v=1">
+    <link rel="stylesheet" href="style.css?v=9">
+    <script src="transitions.js?v=1" defer></script>
     <style>
         body {
             margin: 0;
@@ -30,10 +33,16 @@
 
         .back-home {
             display: inline-block;
-            margin-top: 20px;
             text-decoration: none;
             color: #49b1f5;
             font-weight: bold;
+        }
+
+        .about-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
         }
 
         /* 1. 定义动画“剧本” */
@@ -91,7 +100,12 @@
             <li>🎮 喜欢的游戏：Apex 、杀戮尖塔 、独立游戏
         </div>
 
-        <a href="index.html" class="back-home">← 返回主页</a>
+        <nav class="about-links" aria-label="关于我页面导航">
+            <a href="index.html" class="back-home">← 返回主页</a>
+            <a href="diary.html" class="back-home">生活日记</a>
+            <a href="admin/login.html" class="back-home">管理员登录</a>
+            <a href="changelog.html" class="back-home">查看更新日志 →</a>
+        </nav>
     </div>
 
 </body>

@@ -1,0 +1,48 @@
+name: Deploy to CloudBase
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: cloudbase-static-hosting
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Publish domestic mirror
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Prepare static files
+        run: |
+          mkdir -p dist
+          rsync -av \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.gitignore' \
+            --exclude 'README.md' \
+            ./ dist/
+
+      - name: Install CloudBase CLI
+        run: npm install --global @cloudbase/cli
+
+      - name: Log in to CloudBase
+        run: >-
+          tcb login
+          --apiKeyId "${{ secrets.TCB_SECRET_ID }}"
+          --apiKey "${{ secrets.TCB_SECRET_KEY }}"
+
+      - name: Deploy static site
+        run: tcb hosting deploy ./dist / -e "${{ secrets.TCB_ENV_ID }}"

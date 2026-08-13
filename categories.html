@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类 - Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg?v=1">
+    <link rel="stylesheet" href="style.css?v=9">
+    <script src="transitions.js?v=1" defer></script>
+    <script src="articles.js?v=2" defer></script>
+    <script src="listing.js?v=2" defer></script>
+</head>
+
+<body class="page-body">
+    <nav class="navbar">
+        <a class="logo" href="index.html">Nick の Blog</a>
+        <div class="menu">
+            <a href="index.html" class="nav-item">首页</a>
+            <a href="admin/login.html" class="nav-item nav-login">管理员登录</a>
+            <a href="diary.html" class="nav-item">日记</a>
+            <a href="categories.html" class="nav-item active" aria-current="page">分类</a>
+            <a href="archives.html" class="nav-item">归档</a>
+            <a href="changelog.html" class="nav-item">更新日志</a>
+            <a href="about.html" class="nav-item">关于我</a>
+            <a href="search.html" class="nav-item">搜索</a>
+        </div>
+    </nav>
+
+    <main class="page-wrapper">
+        <header class="page-heading">
+            <span class="page-kicker">CATEGORIES</span>
+            <h1>文章分类</h1>
+            <p>把散落的灵感整理成清晰的知识地图。</p>
+        </header>
+
+        <section class="content-card" aria-labelledby="category-title">
+            <div class="section-title-row">
+                <div>
+                    <span class="section-eyebrow">COLLECTION</span>
+                    <h2 id="category-title">全部分类</h2>
+                </div>
+                <span class="count-badge" id="category-count-page">0 个分类</span>
+            </div>
+
+            <div class="category-grid" id="category-list">
+                <div class="empty-state">
+                    <span class="empty-icon" aria-hidden="true">◇</span>
+                    <h3>分类栏还是空的</h3>
+                    <p>发布文章后，分类会显示在这里。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

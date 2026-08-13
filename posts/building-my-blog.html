@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="记录 Nick 的个人博客从简单静态页面到完整博客架构的搭建过程。">
+    <title>从零开始搭建我的个人博客 - Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="../favicon.jpg?v=1">
+    <link rel="stylesheet" href="../style.css?v=9">
+    <script src="../transitions.js?v=1" defer></script>
+    <script src="../article.js?v=4" defer></script>
+</head>
+
+<body class="article-body">
+    <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+    <nav class="navbar article-navbar">
+        <a class="logo" href="../index.html">Nick の Blog</a>
+        <div class="menu">
+            <a href="../index.html" class="nav-item">首页</a>
+            <a href="../admin/login.html" class="nav-item nav-login">管理员登录</a>
+            <a href="../diary.html" class="nav-item">日记</a>
+            <a href="../categories.html" class="nav-item">分类</a>
+            <a href="../archives.html" class="nav-item active">归档</a>
+            <a href="../changelog.html" class="nav-item">更新日志</a>
+            <a href="../about.html" class="nav-item">关于我</a>
+            <a href="../search.html" class="nav-item">搜索</a>
+        </div>
+    </nav>
+
+    <header class="article-hero">
+        <div class="article-hero-shade"></div>
+        <div class="article-hero-content">
+            <a class="article-category" href="../categories.html">博客搭建</a>
+            <h1>从零开始搭建<br>我的个人博客</h1>
+            <p>记录这个博客从简单样板到个人数字空间的第一阶段。</p>
+            <div class="article-meta">
+                <time datetime="2026-07-12">2026 年 7 月 12 日</time>
+                <span>阅读约 6 分钟</span>
+                <span>Nick</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-page">
+        <article class="article-content">
+            <p class="article-lead">一直以来，我都希望拥有一个真正属于自己的网络空间。它不只是展示信息的名片，也可以保存学习过程、项目经验和生活里的灵感。于是，这个博客成为了我的第一个长期网站项目。</p>
+
+            <section id="why-blog">
+                <h2>为什么要搭建个人博客？</h2>
+                <p>社交平台适合分享当下，但内容很容易被时间线淹没。个人博客则更像一座自己维护的图书馆：页面如何组织、文章如何呈现、哪些内容值得留下，都可以由自己决定。</p>
+                <blockquote>我希望这里既是一份成长档案，也是一块可以持续试验新技术的地方。</blockquote>
+                <p>目前我正在学习嵌入式开发，同时也开始接触 HTML、CSS 和 JavaScript。亲手完成一个博客，可以把零散知识组合成真实作品。</p>
+            </section>
+
+            <section id="tech-choice">
+                <h2>第一阶段的技术选择</h2>
+                <p>博客当前采用最基础的静态网页方案，主要由三个部分组成：</p>
+                <ul>
+                    <li><strong>HTML</strong>：定义页面的内容与结构。</li>
+                    <li><strong>CSS</strong>：负责布局、颜色、动画和响应式设计。</li>
+                    <li><strong>JavaScript</strong>：实现文章数据、搜索和阅读交互。</li>
+                </ul>
+                <p>这种方案没有复杂的构建流程，很适合用来理解浏览器如何加载和呈现网页。例如，一张最简单的文章卡片可以这样组织：</p>
+                <pre><code>&lt;article class="post-card"&gt;
+    &lt;h2&gt;文章标题&lt;/h2&gt;
+    &lt;p&gt;文章简介&lt;/p&gt;
+    &lt;a href="文章地址"&gt;继续阅读&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+            </section>
+
+            <section id="design-process">
+                <h2>从样板到真正的首页</h2>
+                <p>最初的页面只有背景、头像卡片和顶部导航。它已经具备个人风格，但还无法承担博客首页的任务。新的首页增加了欢迎区、个人简介、最新文章、最近项目和快捷入口。</p>
+                <p>视觉上继续保留我喜欢的动漫背景，同时使用深色内容区和半透明卡片，让图片负责营造氛围，让文字区域保持清晰。页面也针对手机屏幕重新排列，避免只能在电脑上正常浏览。</p>
+                <pre><code>.content-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+}</code></pre>
+            </section>
+
+            <section id="git-workflow">
+                <h2>用 Git 保存每一个阶段</h2>
+                <p>博客文件保存在电脑上，Git 负责记录每一次有意义的修改，GitHub 则保存远程副本并用于发布网站。以后一次完整更新通常会经历：</p>
+                <pre><code>git status
+git add .
+git commit -m "新增一篇博客文章"
+git push</code></pre>
+                <p>这样做的好处是，即使某次修改出现问题，也可以找到之前稳定的版本，而不需要创建很多“最终版”文件夹。</p>
+            </section>
+
+            <section id="next-step">
+                <h2>接下来准备做什么？</h2>
+                <p>第一篇文章只是起点。接下来我计划逐渐补充这些内容：</p>
+                <ul>
+                    <li>整理嵌入式学习笔记和实验记录。</li>
+                    <li>展示正在完成的个人项目。</li>
+                    <li>增加摄影、游戏和生活随笔。</li>
+                    <li>继续完善主题切换、评论和网站性能。</li>
+                </ul>
+                <p>博客不需要一次变得完美。比起追求一个永远无法完成的最终版本，我更希望它随着学习一起慢慢成长。</p>
+            </section>
+
+            <footer class="article-ending">
+                <span>END</span>
+                <p>感谢读到这里，这也是博客正式开始记录的第一天。</p>
+            </footer>
+        </article>
+
+        <aside class="article-toc" aria-label="文章目录">
+            <span>CONTENTS</span>
+            <strong>文章目录</strong>
+            <nav>
+                <a class="active" href="#why-blog">为什么搭建博客</a>
+                <a href="#tech-choice">技术选择</a>
+                <a href="#design-process">首页设计过程</a>
+                <a href="#git-workflow">Git 工作流</a>
+                <a href="#next-step">下一步计划</a>
+            </nav>
+            <a class="toc-back" href="../index.html">← 返回首页</a>
+        </aside>
+    </main>
+
+    <footer class="home-footer">
+        <p>© 2026 Nick · 保持好奇，无限进步。</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>日记管理 - Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="../favicon.jpg?v=1">
+    <link rel="stylesheet" href="../style.css?v=9">
+    <script src="https://static.cloudbase.net/cloudbase-js-sdk/3.7.1/cloudbase.full.js" defer></script>
+    <script src="../cloudbase-config.js?v=3" defer></script>
+    <script src="../cloudbase-client.js?v=4" defer></script>
+    <script src="../diary-markdown.js?v=1" defer></script>
+    <script src="admin.js?v=3" defer></script>
+</head>
+
+<body class="admin-body">
+    <header class="admin-topbar">
+        <div>
+            <a href="../index.html">Nick の Blog</a>
+            <span>日记管理</span>
+        </div>
+        <div class="admin-topbar-actions">
+            <a href="../diary.html" target="_blank" rel="noreferrer">查看日记页 ↗</a>
+            <button type="button" id="logout-button">退出登录</button>
+        </div>
+    </header>
+
+    <main class="admin-layout" id="admin-layout" hidden>
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-head">
+                <div>
+                    <span>MY DIARIES</span>
+                    <h1>日记列表</h1>
+                </div>
+                <button type="button" id="new-diary-button" aria-label="新建日记">＋</button>
+            </div>
+            <div class="admin-diary-list" id="admin-diary-list">
+                <p>正在读取日记……</p>
+            </div>
+        </aside>
+
+        <section class="admin-editor-panel">
+            <div class="admin-setup-warning" id="admin-setup-warning" hidden>
+                <strong>还差一步管理员绑定</strong>
+                <p>当前登录 UID：<code id="current-admin-uid"></code></p>
+                <p>当前部署尚未绑定管理员 UID。请先完成 CloudBase 环境配置；完成前发布按钮会保持禁用。</p>
+            </div>
+
+            <form id="diary-editor-form" class="diary-editor-form">
+                <input type="hidden" name="id">
+                <div class="admin-editor-heading">
+                    <div>
+                        <span id="editor-mode-label">NEW ENTRY</span>
+                        <h2 id="editor-heading">写一篇新日记</h2>
+                    </div>
+                    <span class="draft-status" id="draft-status">尚未保存</span>
+                </div>
+
+                <label class="admin-field admin-field-title">
+                    <span>标题</span>
+                    <input type="text" name="title" maxlength="80" required placeholder="今天想记录什么？">
+                </label>
+
+                <div class="admin-field-grid three-columns">
+                    <label class="admin-field">
+                        <span>记录时间</span>
+                        <input type="datetime-local" name="publishedAt" required>
+                    </label>
+                    <label class="admin-field">
+                        <span>心情</span>
+                        <input type="text" name="mood" maxlength="20" placeholder="例如：开心">
+                    </label>
+                    <label class="admin-field">
+                        <span>天气</span>
+                        <input type="text" name="weather" maxlength="20" placeholder="例如：晴天 28°C">
+                    </label>
+                </div>
+
+                <div class="admin-field-grid">
+                    <label class="admin-field">
+                        <span>地点（可选）</span>
+                        <input type="text" name="location" maxlength="40" placeholder="不填写就不会公开位置">
+                    </label>
+                    <label class="admin-field">
+                        <span>标签</span>
+                        <input type="text" name="tags" maxlength="100" placeholder="生活, 随手拍（用逗号分隔）">
+                    </label>
+                </div>
+
+                <label class="admin-field">
+                    <span>摘要</span>
+                    <textarea name="summary" rows="3" maxlength="220" placeholder="用一两句话概括这篇日记。"></textarea>
+                </label>
+
+                <div class="admin-compose-grid">
+                    <label class="admin-field admin-content-field">
+                        <span>正文</span>
+                        <textarea name="content" rows="18" required placeholder="直接写下正文。支持 ## 小标题、**加粗**、> 引用和 - 列表。"></textarea>
+                    </label>
+                    <section class="admin-preview" aria-labelledby="preview-title">
+                        <span>PREVIEW</span>
+                        <h3 id="preview-title">实时预览</h3>
+                        <div id="content-preview" class="diary-prose"><p>正文会在这里预览。</p></div>
+                    </section>
+                </div>
+
+                <section class="admin-image-section">
+                    <div>
+                        <span>日记图片</span>
+                        <p>支持 JPG、PNG、WebP，单张不超过 8 MB。发布前请确认照片中没有敏感位置或隐私信息。</p>
+                    </div>
+                    <label class="admin-upload-button">
+                        选择图片
+                        <input type="file" id="diary-image-input" accept="image/jpeg,image/png,image/webp" multiple hidden>
+                    </label>
+                    <div class="admin-image-list" id="admin-image-list"></div>
+                    <p class="admin-upload-status" id="upload-status" role="status"></p>
+                </section>
+
+                <div class="admin-editor-actions">
+                    <button type="button" class="admin-secondary-button danger" id="delete-diary-button" hidden>删除</button>
+                    <div>
+                        <button type="button" class="admin-secondary-button" id="save-draft-button">保存草稿</button>
+                        <button type="button" class="admin-primary-button" id="publish-diary-button">发布日记</button>
+                    </div>
+                </div>
+                <p class="admin-form-message" id="editor-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <div class="admin-loading-screen" id="admin-loading-screen">正在验证管理员身份……</div>
+</body>
+
+</html>

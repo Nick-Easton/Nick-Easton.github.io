@@ -1,53 +1,174 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-
 <head>
     <meta charset="UTF-8">
-    <title>我的个人博客</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nick 的个人博客，记录嵌入式、前端学习、项目与生活。">
+    <title>Nick の Blog</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg?v=1">
+    <link rel="stylesheet" href="style.css?v=9">
+    <script src="transitions.js?v=1" defer></script>
+    <script src="articles.js?v=2" defer></script>
+    <script src="home.js?v=2" defer></script>
 </head>
 
-
-<body>
-    
-    <div class="main-container">
-        <aside class="sidebar">
-
-            <!-- 头像卡片类 -->
-            <div class="card profile-card">  
-                <img src="hp.jpg" alt="头像" class="avatar">
-                <h2 class="username">Nick</h2>
-                <p class="motto">无限进步.</p>
-
-                <div class="stats">
-                    <div class="stat-item"><span>文章</span><br>0</div>
-                    <div class="stat-item"><span>标签</span><br>0</div>
-                    <div class="stat-item"><span>分类</span><br>0</div>
-                </div>
-
-                <button class="follow-btn">Follow Me</button>
-            </div>
-        </aside>
-
-        
-    </div>
-    <nav class="navbar">
-        <div class="logo">Nick の Blog</div>
+<body class="home-body">
+    <nav class="navbar home-navbar">
+        <a class="logo" href="index.html">Nick の Blog</a>
         <div class="menu">
-            <a href="about.html" class="nav-item">关于我</a>
-            <a href="index.html" class="nav-item active">标签</a>
-            <a href="archives.html" class="nav-item">归档</a>
+            <a href="index.html" class="nav-item active" aria-current="page">首页</a>
+            <a href="admin/login.html" class="nav-item nav-login">管理员登录</a>
+            <a href="diary.html" class="nav-item">日记</a>
             <a href="categories.html" class="nav-item">分类</a>
+            <a href="archives.html" class="nav-item">归档</a>
+            <a href="changelog.html" class="nav-item">更新日志</a>
+            <a href="about.html" class="nav-item">关于我</a>
             <a href="search.html" class="nav-item">搜索</a>
-
         </div>
     </nav>
 
-    <div style="text-align: center; color: white; margin-top: 100px;">
-        <h1 class="fade-text">标签</h1>
-    </div>
+    <header class="home-hero">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+            <span class="hero-eyebrow">WELCOME TO MY DIGITAL GARDEN</span>
+            <h1>你好，我是 <strong>Nick</strong></h1>
+            <p class="hero-role">电子类学生 · 嵌入式学习者 · 技术爱好者</p>
+            <p class="hero-description">记录代码、项目，以及生活中值得留下的瞬间。</p>
+            <div class="hero-actions">
+                <a class="primary-action" href="#latest">开始阅读</a>
+                <a class="secondary-action" href="about.html">了解我</a>
+            </div>
+        </div>
+        <a class="scroll-cue" href="#home-content" aria-label="向下浏览首页内容">
+            <span>SCROLL</span>
+            <i aria-hidden="true"></i>
+        </a>
+    </header>
 
+    <main class="home-main" id="home-content">
+        <div class="home-layout">
+            <aside class="home-profile-card">
+                <img src="hp.jpg" alt="Nick 的头像" class="home-avatar">
+                <p class="profile-label">ABOUT ME</p>
+                <h2>Nick</h2>
+                <p class="profile-motto">保持好奇，无限进步。</p>
+
+                <div class="profile-stats" aria-label="博客统计">
+                    <div><strong id="article-count">0</strong><span>文章</span></div>
+                    <div><strong id="category-count">0</strong><span>分类</span></div>
+                    <div><strong id="tag-count">0</strong><span>标签</span></div>
+                </div>
+
+                <div class="learning-now">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <div>
+                        <small>最近在学习</small>
+                        <strong>嵌入式 · JavaScript</strong>
+                    </div>
+                </div>
+
+                <a class="profile-link" href="about.html">更多关于我 →</a>
+            </aside>
+
+            <div class="home-feed">
+                <section class="home-section" id="latest">
+                    <div class="home-section-heading">
+                        <div>
+                            <span>LATEST POSTS</span>
+                            <h2>最新文章</h2>
+                        </div>
+                        <a href="archives.html">查看归档 →</a>
+                    </div>
+
+                    <article class="first-post-card" id="latest-post">
+                        <div class="post-card-copy">
+                            <span class="post-status">NEW POST</span>
+                            <span class="post-meta" data-article-meta>博客搭建 · 2026 年 7 月 13 日 · 阅读 12 分钟</span>
+                            <h3><a data-article-title href="posts/cloudbase-mirror-deployment.html">给博客加一个国内访问镜像</a></h3>
+                            <p data-article-excerpt>从访问链路、静态托管和 CDN 原理开始，完整记录 CloudBase 镜像的部署过程。</p>
+                            <div class="post-tags" data-article-tags>
+                                <span>CloudBase</span>
+                                <span>GitHub</span>
+                                <span>CDN</span>
+                            </div>
+                        </div>
+                        <span class="post-card-mark" aria-hidden="true">02</span>
+                    </article>
+                </section>
+
+                <section class="home-section">
+                    <div class="home-section-heading">
+                        <div>
+                            <span>CURRENTLY</span>
+                            <h2>最近在做</h2>
+                        </div>
+                    </div>
+
+                    <div class="current-grid">
+                        <article class="current-card current-card-featured">
+                            <span class="current-icon" aria-hidden="true">⌘</span>
+                            <div>
+                                <small>PROJECT</small>
+                                <h3>个人博客</h3>
+                                <p>设计并搭建属于自己的数字空间。</p>
+                            </div>
+                            <span class="progress-pill">进行中</span>
+                        </article>
+                        <article class="current-card">
+                            <span class="current-icon" aria-hidden="true">⚙</span>
+                            <div>
+                                <small>LEARNING</small>
+                                <h3>嵌入式开发</h3>
+                                <p>从基础开始积累项目经验。</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="home-section">
+                    <div class="home-section-heading">
+                        <div>
+                            <span>EXPLORE</span>
+                            <h2>探索博客</h2>
+                        </div>
+                    </div>
+
+                    <div class="quick-links">
+                        <a href="diary.html">
+                            <span aria-hidden="true">✦</span>
+                            <strong>生活日记</strong>
+                            <small>照片、心情与普通日常</small>
+                        </a>
+                        <a href="categories.html">
+                            <span aria-hidden="true">◇</span>
+                            <strong>文章分类</strong>
+                            <small>按照主题浏览内容</small>
+                        </a>
+                        <a href="archives.html">
+                            <span aria-hidden="true">◷</span>
+                            <strong>时间归档</strong>
+                            <small>回顾每一次记录</small>
+                        </a>
+                        <a href="changelog.html">
+                            <span aria-hidden="true">↻</span>
+                            <strong>更新日志</strong>
+                            <small>看看网站如何成长</small>
+                        </a>
+                        <a href="search.html">
+                            <span aria-hidden="true">⌕</span>
+                            <strong>站内搜索</strong>
+                            <small>快速找到关键词</small>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="home-footer">
+        <p>© 2026 Nick · 保持好奇，无限进步。</p>
+    </footer>
 </body>
 
 </html>
